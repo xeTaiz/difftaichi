@@ -101,6 +101,12 @@ gui = ti.GUI("Billiards", (1024, 1024), background_color=0x3C733F)
 
 
 def forward(visualize=False, output=None):
+    ''' Forward pass for visualization
+
+    Args:
+        visualize (bool, optional): Wheter to show a visualization of the optimization. Defaults to False.
+        output ([type], optional): name for output images. Defaults to None.
+    '''
     initialize()
 
     interval = vis_interval
@@ -109,11 +115,10 @@ def forward(visualize=False, output=None):
         os.makedirs('billiards/{}/'.format(output), exist_ok=True)
 
     count = 0
-    for i in range(billiard_layers):
+    for i in range(billiard_layers): # Setup starting ball pattern
         for j in range(i + 1):
             count += 1
-            x[0, count] = [
-                i * 2 * radius + 0.5, j * 2 * radius + 0.5 - i * radius * 0.7
+            x[0, count] = [i * 2 * radius + 0.5, j * 2 * radius + 0.5 - i * radius * 0.7
             ]
 
     pixel_radius = int(radius * 1024) + 1
